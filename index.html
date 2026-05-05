@@ -1,158 +1,1351 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Decisão de Moradia - Formulário para Dupla</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    select, textarea, input[type="text"] { width: 100%; padding: 8px; margin-top: 5px; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
-    .resposta { margin-top: 30px; background: #f0f0f0; padding: 20px; border-radius: 8px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silhouette Experts® – Importadora e Distribuidora Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #E8112D;
+  --red-dark: #B50E23;
+  --black: #111111;
+  --gray-dark: #2A2A2A;
+  --gray: #555555;
+  --gray-light: #F4F4F4;
+  --white: #FFFFFF;
+  --border: #E0E0E0;
+  --blue-tag: #1A56DB;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+/* TOPBAR */
+.topbar {
+  background: var(--black);
+  color: #ccc;
+  font-size: 0.78rem;
+  padding: 0.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.03em;
+}
+.topbar a { color: #ccc; text-decoration: none; }
+.topbar strong { color: var(--red); }
+
+/* NAV */
+nav {
+  background: var(--white);
+  border-bottom: 2px solid var(--red);
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 64px;
+}
+.logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--black);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.logo span { color: var(--red); }
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  height: 100%;
+}
+.nav-links > li {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.nav-links > li > a {
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-dark);
+  padding: 0 0.9rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active { color: var(--red); border-bottom-color: var(--red); }
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.btn-nav {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.btn-nav:hover { background: var(--red-dark); }
+
+/* HERO BANNER */
+.hero {
+  background: linear-gradient(135deg, #0F0F0F 0%, #1E1E1E 50%, #2A0A0F 100%);
+  color: white;
+  padding: 4.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,17,45,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+.hero h1 span { color: var(--red); }
+.hero p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #bbb;
+  max-width: 440px;
+  margin-bottom: 2rem;
+}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-hero {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 0.85rem 2rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-hero:hover { background: var(--red-dark); transform: translateY(-1px); }
+.btn-hero-ghost {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  padding: 0.85rem 2rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: border-color 0.15s;
+}
+.btn-hero-ghost:hover { border-color: white; }
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.machine-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  width: 280px;
+}
+.machine-icon {
+  width: 120px;
+  height: 80px;
+  background: rgba(232,17,45,0.15);
+  border: 1px solid rgba(232,17,45,0.3);
+  border-radius: 6px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.machine-icon svg { width: 60px; fill: rgba(232,17,45,0.8); }
+.machine-card h3 { font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.3rem; }
+.machine-card p { font-size: 0.78rem; color: #999; }
+.machine-price { font-size: 1.4rem; font-weight: 700; color: var(--red); margin-top: 0.5rem; }
+
+/* STATS */
+.stats-bar {
+  background: var(--red);
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.stat {
+  text-align: center;
+  color: white;
+}
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* SECTION */
+section { padding: 3.5rem 3rem; }
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--black);
+}
+.section-title span { color: var(--red); }
+.section-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+}
+.section-link:hover { text-decoration: underline; }
+
+/* PRODUCT GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.product-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+.product-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.product-img {
+  background: var(--gray-light);
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.product-img svg { width: 55%; height: 55%; }
+.product-tag {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+}
+.tag-new { background: var(--red); color: white; }
+.tag-best { background: var(--blue-tag); color: white; }
+.tag-off { background: #333; color: white; }
+.product-info { padding: 0.9rem 1rem; }
+.product-brand { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.2rem; }
+.product-name { font-size: 0.92rem; font-weight: 600; color: var(--black); margin-bottom: 0.5rem; line-height: 1.35; }
+.product-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.5; margin-bottom: 0.75rem; }
+.product-price-row { display: flex; align-items: baseline; gap: 0.5rem; }
+.price-old { font-size: 0.78rem; color: #aaa; text-decoration: line-through; }
+.price-current { font-size: 1.1rem; font-weight: 700; color: var(--red); }
+.price-installment { font-size: 0.72rem; color: var(--gray); display: block; margin-top: 0.2rem; }
+.btn-add {
+  width: 100%;
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 0.75rem;
+  border-radius: 2px;
+}
+.btn-add:hover { background: var(--red); }
+
+/* MACHINES HIGHLIGHT */
+.machines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.machine-highlight {
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.machine-highlight:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.mh-icon {
+  width: 72px;
+  height: 60px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mh-icon svg { width: 40px; fill: var(--gray-dark); }
+.mh-info h3 { font-size: 0.95rem; font-weight: 700; color: var(--black); margin-bottom: 0.25rem; }
+.mh-info p { font-size: 0.78rem; color: var(--gray); line-height: 1.5; margin-bottom: 0.5rem; }
+.mh-price { font-size: 1rem; font-weight: 700; color: var(--red); }
+.mh-badge {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.4rem;
+}
+
+/* CATEGORIES */
+.categories {
+  background: var(--gray-light);
+  padding: 3rem 3rem;
+}
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+.cat-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cat-card:hover { border-color: var(--red); box-shadow: 0 2px 12px rgba(232,17,45,0.08); }
+.cat-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+.cat-name { font-size: 0.82rem; font-weight: 600; color: var(--gray-dark); text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; }
+
+/* BANNER STRIP */
+.banner-strip {
+  background: var(--black);
+  padding: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.banner-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: white;
+}
+.banner-icon { font-size: 2rem; flex-shrink: 0; margin-top: 0.2rem; }
+.banner-item h4 { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.banner-item p { font-size: 0.8rem; color: #999; line-height: 1.5; }
+
+/* FOOTER */
+footer {
+  background: #0D0D0D;
+  color: #999;
+  padding: 3rem 3rem 1.5rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-brand .logo { color: white; display: block; margin-bottom: 0.75rem; font-size: 1.3rem; }
+.footer-brand p { font-size: 0.82rem; line-height: 1.7; color: #777; max-width: 280px; }
+.footer-col h4 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col ul li a { font-size: 0.82rem; color: #777; text-decoration: none; transition: color 0.15s; }
+.footer-col ul li a:hover { color: var(--red); }
+.footer-bottom {
+  border-top: 1px solid #222;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+/* ===== CHATBOT ===== */
+#chat-bubble {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+}
+#chat-toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--red);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(232,17,45,0.4);
+  transition: transform 0.2s, background 0.2s;
+}
+#chat-toggle:hover { transform: scale(1.08); background: var(--red-dark); }
+#chat-toggle svg { width: 22px; height: 22px; fill: white; }
+
+#chat-window {
+  position: fixed;
+  bottom: 4.5rem;
+  right: 1.5rem;
+  width: 370px;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 9999;
+  animation: slideUp 0.22s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#chat-window.open { display: flex; }
+
+.chat-header {
+  background: var(--black);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.chat-avatar {
+  width: 38px;
+  height: 38px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.chat-header-info h3 { font-size: 0.9rem; font-weight: 700; color: white; letter-spacing: 0.03em; }
+.chat-status { font-size: 0.7rem; color: #aaa; display: flex; align-items: center; gap: 0.3rem; margin-top: 0.15rem; }
+.status-dot { width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; }
+.chat-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0.2rem;
+}
+.chat-close:hover { color: white; }
+
+#chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 380px;
+  min-height: 180px;
+  background: #FAFAFA;
+}
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.msg { display: flex; flex-direction: column; max-width: 85%; }
+.msg.bot { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.msg-bubble {
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  border-radius: 4px;
+}
+.msg.bot .msg-bubble { background: white; border: 1px solid var(--border); color: var(--black); border-radius: 2px 10px 10px 10px; }
+.msg.user .msg-bubble { background: var(--red); color: white; border-radius: 10px 2px 10px 10px; }
+.msg-time { font-size: 0.65rem; color: #bbb; margin-top: 0.2rem; padding: 0 0.2rem; }
+.msg.user .msg-time { text-align: right; }
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 0.65rem 0.9rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 2px 10px 10px 10px;
+  width: fit-content;
+}
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #ccc;
+  border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.quick-replies { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.quick-reply {
+  background: white;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.73rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  letter-spacing: 0.04em;
+}
+.quick-reply:hover { background: var(--red); color: white; }
+
+.chat-input-area {
+  border-top: 1px solid var(--border);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  gap: 0.5rem;
+  background: white;
+}
+#chat-input {
+  flex: 1;
+  border: 1px solid var(--border);
+  background: var(--gray-light);
+  padding: 0.55rem 0.85rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.875rem;
+  color: var(--black);
+  outline: none;
+  border-radius: 3px;
+  transition: border-color 0.15s;
+}
+#chat-input:focus { border-color: var(--red); background: white; }
+#chat-input::placeholder { color: #bbb; }
+#send-btn {
+  background: var(--red);
+  border: none;
+  cursor: pointer;
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+#send-btn:hover { background: var(--red-dark); }
+#send-btn svg { width: 16px; height: 16px; fill: white; }
+#send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* SVG icons */
+.icon-cutter { display: inline-block; }
+</style>
 </head>
 <body>
-  <h1>Formulário: Onde Vamos Morar?</h1>
-  <form id="moradiaForm">
-    <label for="nome">Seu nome:</label>
-    <input type="text" name="nome" id="nome" placeholder="Ex: Laura">
 
-    <label for="nome2">Nome da outra pessoa:</label>
-    <input type="text" name="nome2" id="nome2" placeholder="Ex: Marcelo">
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📦 Frete grátis para SP capital acima de R$ 500 | <strong>Distribuidora Oficial Silhouette America no Brasil</strong></span>
+  <span>📞 Suporte: (11) 9 9999-0000</span>
+</div>
 
-    <label>1. Preferimos área:</label>
-    <select name="area">
-      <option value="urbana">Urbana</option>
-      <option value="suburbana">Suburbana</option>
-      <option value="rural">Rural</option>
-    </select>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SILHOUETTE <span>EXPERTS</span><sup style="font-size:0.5rem; color:var(--gray)">®</sup></a>
+  <ul class="nav-links">
+    <li><a href="#lancamentos" class="active">Lançamentos</a></li>
+    <li><a href="#maquinas">Máquinas</a></li>
+    <li><a href="#combos">Combos</a></li>
+    <li><a href="#materiais">Materiais</a></li>
+    <li><a href="#acessorios">Acessórios</a></li>
+    <li><a href="#cursos">Cursos</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="btn-nav">🛒 Carrinho</a>
+  </div>
+</nav>
 
-    <label>2. Locais importantes por perto:</label>
-    <textarea name="locais">Trabalho, família, amigos, academia, supermercado...</textarea>
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <span class="hero-badge">🆕 Lançamento 2025</span>
+    <h1>Silhouette<br><span>Cameo 5 Alpha</span><br>chegou ao Brasil</h1>
+    <p>A nova geração das máquinas de corte digital. Mais precisão, mais velocidade e compatibilidade total com o Studio Designer Edition.</p>
+    <div class="hero-cta">
+      <button class="btn-hero">Ver máquinas</button>
+      <button class="btn-hero-ghost">Ver combos</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="machine-card">
+      <div class="machine-icon">
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="15" width="90" height="30" rx="6" fill="rgba(232,17,45,0.7)"/>
+          <rect x="5" y="38" width="90" height="5" rx="2" fill="rgba(232,17,45,0.4)"/>
+          <rect x="12" y="20" width="30" height="4" rx="1" fill="rgba(255,255,255,0.6)"/>
+          <circle cx="80" cy="22" r="5" fill="rgba(255,255,255,0.3)"/>
+          <rect x="0" y="43" width="100" height="8" rx="2" fill="rgba(232,17,45,0.3)"/>
+        </svg>
+      </div>
+      <h3>Cameo 5 Alpha</h3>
+      <p>Nova geração · 30cm largura</p>
+      <div class="machine-price">A partir de R$ 2.499</div>
+    </div>
+  </div>
+</div>
 
-    <label>3. Estilo de vida preferido:</label>
-    <select name="estilo">
-      <option value="agitado">Agitado e conveniente</option>
-      <option value="tranquilo">Tranquilo e espaçoso</option>
-    </select>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">+15.000</div><div class="stat-label">Clientes atendidos</div></div>
+  <div class="stat"><div class="stat-num">12 anos</div><div class="stat-label">Distribuidora oficial</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Garantia própria</div></div>
+  <div class="stat"><div class="stat-num">+500</div><div class="stat-label">Produtos em estoque</div></div>
+</div>
 
-    <label>4. Transporte público fácil é necessário?</label>
-    <select name="transporte">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+<!-- LANÇAMENTOS -->
+<section id="lancamentos">
+  <div class="section-header">
+    <h2 class="section-title"><span>🆕</span> Lançamentos Silhouette 2025</h2>
+    <a href="#" class="section-link">Ver todos →</a>
+  </div>
+  <div class="products">
 
-    <label>5. Preferimos fazer tudo a pé/bicicleta?</label>
-    <select name="mobilidade">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="10" width="90" height="30" rx="5" fill="#e0e0e0"/>
+          <rect x="5" y="34" width="90" height="4" rx="2" fill="#ccc"/>
+          <rect x="12" y="15" width="25" height="3" rx="1" fill="#bbb"/>
+          <circle cx="78" cy="17" r="4" fill="#bbb"/>
+          <rect x="0" y="38" width="100" height="7" rx="2" fill="#d5d5d5"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Cameo 5 Alpha</div>
+        <div class="product-desc">Máquina de corte 30cm com nova tecnologia de precisão aumentada</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 2.499,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 208,25 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>6. Tipo de moradia:</label>
-    <select name="tipo">
-      <option value="apartamento">Apartamento</option>
-      <option value="casa">Casa</option>
-      <option value="loft">Loft</option>
-      <option value="studio">Studio</option>
-    </select>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="8" width="96" height="34" rx="5" fill="#e0e0e0"/>
+          <rect x="2" y="36" width="96" height="4" rx="2" fill="#ccc"/>
+          <rect x="10" y="13" width="35" height="3" rx="1" fill="#bbb"/>
+          <circle cx="82" cy="15" r="5" fill="#bbb"/>
+          <rect x="0" y="40" width="100" height="8" rx="2" fill="#d5d5d5"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Cameo 5 Alpha Plus</div>
+        <div class="product-desc">Versão ampliada 38cm, ideal para projetos grandes e comerciais</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 3.199,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 266,58 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>7. Quantidade de quartos e banheiros:</label>
-    <input type="text" name="quartos" placeholder="Ex: 2 quartos e 1 banheiro">
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="5" width="30" height="70" rx="4" fill="#e0e0e0"/>
+          <rect x="28" y="12" width="24" height="4" rx="1" fill="#bbb"/>
+          <circle cx="40" cy="60" r="8" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Silhouette Stand</div>
+        <div class="product-desc">Suporte oficial ergonômico para Cameo 4 e Cameo 5 — perfeito para ateliers</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 489,00</span>
+        </div>
+        <span class="price-installment">6x de R$ 81,50 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>8. Espaço externo (varanda, quintal) é importante?</label>
-    <select name="espaco">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="5" width="20" height="80" rx="10" fill="#e0e0e0"/>
+          <rect x="24" y="5" width="4" height="80" rx="2" fill="#ccc"/>
+          <polygon points="30,85 25,95 35,95" fill="#bbb"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Caneta Térmica Super Fina</div>
+        <div class="product-desc">Traço de 0,4mm para detalhes ultrafinos — compatível com todas Cameo e Portrait</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 189,00</span>
+        </div>
+        <span class="price-installment">3x de R$ 63,00 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>9. Temos ou pretendemos ter pets?</label>
-    <select name="pets">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="80" height="50" rx="6" fill="#e0e0e0"/>
+          <rect x="20" y="20" width="60" height="30" rx="3" fill="#ccc"/>
+          <circle cx="50" cy="35" r="8" fill="#bbb"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Silhouette cloChé</div>
+        <div class="product-desc">Prensa térmica profissional para transfer e HTV — resultado profissional em casa</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 1.290,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 107,50 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>10. Orçamento mensal máximo (aluguel + contas):</label>
-    <input type="text" name="orcamento" placeholder="Ex: R$ 3.000">
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-new">Novo</span>
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="5" width="96" height="40" rx="5" fill="#e0e0e0"/>
+          <rect x="2" y="39" width="96" height="5" rx="2" fill="#ccc"/>
+          <rect x="10" y="10" width="40" height="3" rx="1" fill="#bbb"/>
+          <circle cx="85" cy="12" r="6" fill="#bbb"/>
+          <rect x="0" y="44" width="100" height="9" rx="2" fill="#d5d5d5"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Silhouette</div>
+        <div class="product-name">Cameo Pro MK-II</div>
+        <div class="product-desc">60cm de largura de corte — máquina profissional para gráficas e grandes produções</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 8.990,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 749,17 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <label>11. Abrimos mão de conforto por preço menor?</label>
-    <select name="conforto_vs_preco">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+  </div>
+</section>
 
-    <label>12. Precisamos de home office?</label>
-    <select name="homeOffice">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+<!-- MÁQUINAS -->
+<section id="maquinas" style="background: var(--gray-light);">
+  <div class="section-header">
+    <h2 class="section-title">Máquinas de Corte <span>Digital</span></h2>
+    <a href="#" class="section-link">Ver todas →</a>
+  </div>
+  <div class="machines-grid">
 
-    <label>13. Costumamos receber visitas com frequência?</label>
-    <select name="visitas">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="8" width="94" height="30" rx="4" fill="#ddd"/>
+          <rect x="3" y="33" width="94" height="4" rx="2" fill="#ccc"/>
+          <rect x="0" y="37" width="100" height="7" rx="2" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <span class="mh-badge">🆕 Novo</span>
+        <h3>Cameo 5 Alpha</h3>
+        <p>30cm · Bluetooth · USB-C · compatível com Studio</p>
+        <div class="mh-price">R$ 2.499,00</div>
+      </div>
+    </div>
 
-    <label>14. Precisamos de isolamento acústico ou privacidade?</label>
-    <select name="isolamento">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="6" width="96" height="34" rx="4" fill="#ddd"/>
+          <rect x="2" y="34" width="96" height="4" rx="2" fill="#ccc"/>
+          <rect x="0" y="38" width="100" height="8" rx="2" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <span class="mh-badge">🆕 Novo</span>
+        <h3>Cameo 5 Alpha Plus</h3>
+        <p>38cm · Duas ferramentas simultâneas · LCD touch</p>
+        <div class="mh-price">R$ 3.199,00</div>
+      </div>
+    </div>
 
-    <label>15. Prioridades no dia a dia:</label>
-    <textarea name="prioridades_dia">Ex: Cozinhar, academia, silêncio, natureza, segurança...</textarea>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 80 55" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="10" width="70" height="28" rx="4" fill="#ddd"/>
+          <rect x="5" y="33" width="70" height="4" rx="2" fill="#ccc"/>
+          <rect x="0" y="37" width="80" height="8" rx="2" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <h3>Portrait 4</h3>
+        <p>20cm · Compacta · Wi-Fi · ideal para iniciantes</p>
+        <div class="mh-price">R$ 1.299,00</div>
+      </div>
+    </div>
 
-    <label>16. Quanto tempo pretendemos morar no local?</label>
-    <select name="tempo">
-      <option value="menos_1">Menos de 1 ano</option>
-      <option value="1_3">1 a 3 anos</option>
-      <option value="mais_3">Mais de 3 anos</option>
-    </select>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="5" width="80" height="60" rx="5" fill="#ddd"/>
+          <rect x="15" y="15" width="60" height="40" rx="3" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <h3>Curio 2</h3>
+        <p>Relevo, corte e riscagem · plataforma de 20x30cm</p>
+        <div class="mh-price">R$ 1.899,00</div>
+      </div>
+    </div>
 
-    <label>17. Pretendemos ter filhos ou fazer mudanças grandes em breve?</label>
-    <select name="mudancas_futuras">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="5" width="100" height="33" rx="4" fill="#ddd"/>
+          <rect x="0" y="32" width="100" height="4" rx="2" fill="#ccc"/>
+          <rect x="0" y="36" width="100" height="9" rx="2" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <h3>Cameo 4 Plus</h3>
+        <p>38cm · Duas ferramentas · grande capacidade</p>
+        <div class="mh-price">R$ 3.890,00</div>
+      </div>
+    </div>
 
-    <label>18. A casa precisa ser flexível para mudanças?</label>
-    <select name="flexivel">
-      <option value="sim">Sim</option>
-      <option value="nao">Não</option>
-    </select>
+    <div class="machine-highlight">
+      <div class="mh-icon">
+        <svg viewBox="0 0 100 55" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="4" width="100" height="36" rx="4" fill="#ddd"/>
+          <rect x="0" y="34" width="100" height="5" rx="2" fill="#ccc"/>
+          <rect x="0" y="39" width="100" height="10" rx="2" fill="#ccc"/>
+        </svg>
+      </div>
+      <div class="mh-info">
+        <h3>Cameo Pro MK-II</h3>
+        <p>60cm · Profissional · gráficas e produções em escala</p>
+        <div class="mh-price">R$ 8.990,00</div>
+      </div>
+    </div>
 
-    <label>19. O que é essencial para cada um em um lar?</label>
-    <textarea name="essenciais">Ex: Sol da manhã, boa cozinha, elevador, silêncio, bairro seguro...</textarea>
+  </div>
+</section>
 
-    <label>20. Algo que um de nós não suporta em uma casa?</label>
-    <textarea name="insuportavel">Ex: barulho, falta de luz natural, prédios altos ao redor...</textarea>
+<!-- CATEGORIAS -->
+<div class="categories" id="materiais">
+  <div class="section-header">
+    <h2 class="section-title">Explore por <span>Categoria</span></h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card"><span class="cat-icon">🔪</span><div class="cat-name">Bases e Lâminas</div></div>
+    <div class="cat-card"><span class="cat-icon">🎨</span><div class="cat-name">Materiais e Vinil</div></div>
+    <div class="cat-card"><span class="cat-icon">✏️</span><div class="cat-name">Canetas e Suportes</div></div>
+    <div class="cat-card"><span class="cat-icon">🔧</span><div class="cat-name">Ferramentas</div></div>
+    <div class="cat-card"><span class="cat-icon">📦</span><div class="cat-name">Combos Completos</div></div>
+    <div class="cat-card"><span class="cat-icon">💾</span><div class="cat-name">Software Studio</div></div>
+    <div class="cat-card"><span class="cat-icon">📚</span><div class="cat-name">Cursos On-line</div></div>
+    <div class="cat-card"><span class="cat-icon">⭐</span><div class="cat-name">Preferidos da Ju</div></div>
+  </div>
+</div>
 
-    <label>21. 3 prioridades absolutas para você:</label>
-    <textarea name="prioridades"></textarea>
+<!-- COMBOS -->
+<section id="combos">
+  <div class="section-header">
+    <h2 class="section-title">Combos <span>mais vendidos</span></h2>
+    <a href="#" class="section-link">Ver todos →</a>
+  </div>
+  <div class="products">
 
-    <label>22. 3 coisas que você está disposto(a) a negociar:</label>
-    <textarea name="negociaveis"></textarea>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-best">🏆 Top</span>
+        <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="5" width="80" height="45" rx="4" fill="#e0e0e0"/>
+          <rect x="10" y="44" width="80" height="5" rx="2" fill="#ccc"/>
+          <rect x="8" y="49" width="84" height="8" rx="2" fill="#d0d0d0"/>
+          <rect x="15" y="60" width="20" height="12" rx="2" fill="#ddd"/>
+          <rect x="65" y="60" width="20" height="12" rx="2" fill="#ddd"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Combo</div>
+        <div class="product-name">Combo Iniciante Papelaria Personalizada</div>
+        <div class="product-desc">Máquina Portrait 4 + base de corte + lâminas + vinil adesivo</div>
+        <div class="product-price-row">
+          <span class="price-old">R$ 1.890,00</span>
+          <span class="price-current">R$ 1.599,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 133,25 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-    <button type="button" onclick="mostrarRespostas()">Ver Respostas</button>
-  </form>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-best">🏆 Top</span>
+        <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="5" width="90" height="45" rx="4" fill="#e0e0e0"/>
+          <rect x="5" y="44" width="90" height="5" rx="2" fill="#ccc"/>
+          <rect x="3" y="49" width="94" height="8" rx="2" fill="#d0d0d0"/>
+          <rect x="10" y="60" width="25" height="12" rx="2" fill="#ddd"/>
+          <rect x="65" y="60" width="25" height="12" rx="2" fill="#ddd"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Combo</div>
+        <div class="product-name">Combo Profissional Cameo 5 Alpha</div>
+        <div class="product-desc">Cameo 5 Alpha + acessórios completos + curso on-line incluso</div>
+        <div class="product-price-row">
+          <span class="price-old">R$ 3.490,00</span>
+          <span class="price-current">R$ 2.990,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 249,17 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-  <div class="resposta" id="respostaDiv" style="display:none;"></div>
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-tag tag-off">-15%</span>
+        <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="5" width="84" height="50" rx="4" fill="#e0e0e0"/>
+          <rect x="8" y="49" width="84" height="5" rx="2" fill="#ccc"/>
+          <rect x="6" y="54" width="88" height="8" rx="2" fill="#d0d0d0"/>
+          <rect x="15" y="65" width="18" height="8" rx="2" fill="#ddd"/>
+          <rect x="67" y="65" width="18" height="8" rx="2" fill="#ddd"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Combo</div>
+        <div class="product-name">Combo Topo de Bolo Completo</div>
+        <div class="product-desc">Máquina + papel wafer + plotter de recorte + lâminas especiais</div>
+        <div class="product-price-row">
+          <span class="price-old">R$ 2.100,00</span>
+          <span class="price-current">R$ 1.785,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 148,75 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
-  <script>
-    function mostrarRespostas() {
-      const form = document.forms["moradiaForm"];
-      let output = "<h2>Respostas:</h2><ul>";
-      for (let i = 0; i < form.elements.length; i++) {
-        const el = form.elements[i];
-        if (el.name && el.value.trim() !== "") {
-          output += `<li><strong>${el.name}:</strong> ${el.value}</li>`;
-        }
-      }
-      output += "</ul>";
-      document.getElementById("respostaDiv").innerHTML = output;
-      document.getElementById("respostaDiv").style.display = "block";
-    }
-  </script>
+    <div class="product-card">
+      <div class="product-img">
+        <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="5" width="80" height="45" rx="4" fill="#e0e0e0"/>
+          <rect x="10" y="44" width="80" height="5" rx="2" fill="#ccc"/>
+          <rect x="8" y="49" width="84" height="8" rx="2" fill="#d0d0d0"/>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">Combo</div>
+        <div class="product-name">Combo Curio 2 — Bordado em Papel</div>
+        <div class="product-desc">Curio 2 + bases + ferramentas de relevo + papel especial</div>
+        <div class="product-price-row">
+          <span class="price-current">R$ 2.399,00</span>
+        </div>
+        <span class="price-installment">12x de R$ 199,92 sem juros</span>
+        <button class="btn-add">Adicionar ao carrinho</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner-strip">
+  <div class="banner-item">
+    <span class="banner-icon">🚚</span>
+    <div>
+      <h4>Frete Grátis</h4>
+      <p>Para SP capital em compras acima de R$ 500. Entrega em todo Brasil.</p>
+    </div>
+  </div>
+  <div class="banner-item">
+    <span class="banner-icon">🛡️</span>
+    <div>
+      <h4>Garantia Própria</h4>
+      <p>Suporte técnico especializado e garantia de 12 meses em todas as máquinas.</p>
+    </div>
+  </div>
+  <div class="banner-item">
+    <span class="banner-icon">💳</span>
+    <div>
+      <h4>Parcelamento</h4>
+      <p>Em até 12x sem juros no cartão de crédito. Aceitamos Pix e boleto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">SILHOUETTE <span>EXPERTS</span>®</span>
+      <p>Importadora e distribuidora oficial da Silhouette America no Brasil desde 2012. Oferecemos as melhores máquinas de corte digital com suporte especializado.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <ul>
+        <li><a href="#">Máquinas de Corte</a></li>
+        <li><a href="#">Lançamentos</a></li>
+        <li><a href="#">Combos</a></li>
+        <li><a href="#">Materiais</a></li>
+        <li><a href="#">Acessórios</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Suporte</h4>
+      <ul>
+        <li><a href="#">Central de Ajuda</a></li>
+        <li><a href="#">Rastrear Pedido</a></li>
+        <li><a href="#">Política de Troca</a></li>
+        <li><a href="#">Garantia</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre Nós</a></li>
+        <li><a href="#">Cursos</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Silhouette Experts® — Importadora e Distribuidora Oficial. CNPJ: XX.XXX.XXX/0001-XX</span>
+    <span>Desenvolvido para demonstração</span>
+  </div>
+</footer>
+
+<!-- ===== CHATBOT ===== -->
+<div id="chat-bubble">
+  <button id="chat-toggle" onclick="toggleChat()" title="Falar com suporte">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.2L4 17.2V4H20V16Z"/>
+    </svg>
+  </button>
+</div>
+
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">SE</div>
+    <div class="chat-header-info">
+      <h3>Suporte Silhouette Experts</h3>
+      <div class="chat-status"><div class="status-dot"></div>Atendimento online</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-messages"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Como posso ajudar?" autocomplete="off" onkeydown="handleKey(event)">
+    <button id="send-btn" onclick="sendMessage()">
+      <svg viewBox="0 0 24 24"><path d="M2 21L23 12 2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const SYSTEM_PROMPT = `Você é um assistente de suporte da Silhouette Experts® — importadora e distribuidora oficial da Silhouette America no Brasil.
+
+PRODUTOS E PREÇOS ATUAIS:
+Máquinas:
+- Silhouette Cameo 5 Alpha: R$ 2.499 (30cm, novo lançamento 2025, Bluetooth, USB-C)
+- Silhouette Cameo 5 Alpha Plus: R$ 3.199 (38cm, duas ferramentas simultâneas, LCD touch)
+- Silhouette Portrait 4: R$ 1.299 (20cm, compacta, Wi-Fi, ideal iniciantes)
+- Silhouette Curio 2: R$ 1.899 (relevo, corte e riscagem, plataforma 20x30cm)
+- Silhouette Cameo 4 Plus: R$ 3.890 (38cm, duas ferramentas)
+- Silhouette Cameo Pro MK-II: R$ 8.990 (60cm, profissional, gráficas)
+- Silhouette Alta (impressora 3D): consultar
+
+Lançamentos 2025:
+- Cameo 5 Alpha e Alpha Plus (novos modelos)
+- Silhouette Stand: R$ 489 (suporte ergonômico para Cameo)
+- Caneta Térmica Super Fina: R$ 189 (traço 0,4mm)
+- Silhouette cloChé: R$ 1.290 (prensa térmica para HTV)
+- Cameo Pro MK-II: R$ 8.990
+
+Combos populares:
+- Combo Iniciante Papelaria Personalizada (com Portrait 4): R$ 1.599
+- Combo Profissional Cameo 5 Alpha: R$ 2.990
+- Combo Topo de Bolo: R$ 1.785
+- Combo Curio 2 Bordado em Papel: R$ 2.399
+
+Materiais e acessórios: vinil adesivo, vinil termocolante (HTV), bases de corte, lâminas tipo A/B/C, canetas, bases eletrostáticas, foil, imprimíveis, Oracal.
+
+Software: Silhouette Studio (gratuito), Studio Business Edition (assinatura paga).
+
+POLÍTICAS:
+- Garantia: 12 meses com suporte técnico próprio
+- Parcelamento: até 12x sem juros no cartão
+- Frete grátis: acima de R$ 500 para SP capital
+- Prazos de entrega: SP capital 2-4 dias úteis, demais estados 5-10 dias úteis
+- Troca/devolução: 7 dias corridos para arrependimento, 30 dias para defeito
+- WhatsApp: (11) 9 9999-0000
+
+PERSONALIDADE: Seja prestativo, direto e técnico quando necessário. Use linguagem amigável. Fale sempre em português do Brasil. Máximo 3-4 frases curtas por resposta, use emojis com moderação (apenas 1-2 quando adequado).`;
+
+const messages = [];
+let isOpen = false;
+let isTyping = false;
+
+function toggleChat() {
+  isOpen = !isOpen;
+  document.getElementById('chat-window').classList.toggle('open', isOpen);
+  if (isOpen && messages.length === 0) showWelcome();
+}
+
+function showWelcome() {
+  addMessage('bot',
+    'Olá! Sou o assistente virtual da Silhouette Experts® 👋 Como posso te ajudar hoje?',
+    ['Qual máquina me indica?', 'Ver lançamentos 2025', 'Prazo de entrega', 'Parcelamento']
+  );
+}
+
+function addMessage(role, text, quickReplies = []) {
+  if (role === 'user') messages.push({ role: 'user', content: text });
+  else messages.push({ role: 'assistant', content: text });
+
+  const container = document.getElementById('chat-messages');
+  const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `msg ${role}`;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.textContent = text;
+
+  const time = document.createElement('div');
+  time.className = 'msg-time';
+  time.textContent = now;
+
+  msgDiv.appendChild(bubble);
+  msgDiv.appendChild(time);
+
+  if (quickReplies.length > 0) {
+    const qrDiv = document.createElement('div');
+    qrDiv.className = 'quick-replies';
+    quickReplies.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'quick-reply';
+      btn.textContent = q;
+      btn.onclick = () => { qrDiv.remove(); handleQuickReply(q); };
+      qrDiv.appendChild(btn);
+    });
+    msgDiv.appendChild(qrDiv);
+  }
+
+  container.appendChild(msgDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  const container = document.getElementById('chat-messages');
+  const el = document.createElement('div');
+  el.className = 'msg bot';
+  el.id = 'typing-msg';
+  el.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-msg');
+  if (el) el.remove();
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function handleQuickReply(text) {
+  addMessage('user', text);
+  callClaude();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text || isTyping) return;
+  input.value = '';
+  addMessage('user', text);
+  callClaude();
+}
+
+async function callClaude() {
+  if (isTyping) return;
+  isTyping = true;
+  document.getElementById('send-btn').disabled = true;
+  showTyping();
+
+  const apiMessages = messages.slice(-12);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: apiMessages
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Desculpe, não consegui processar. Tente novamente!';
+    removeTyping();
+    addMessage('bot', reply);
+  } catch (err) {
+    removeTyping();
+    addMessage('bot', 'Ops, problema de conexão. Tente em instantes ou fale conosco pelo WhatsApp! 📱');
+  }
+
+  isTyping = false;
+  document.getElementById('send-btn').disabled = false;
+}
+</script>
+
 </body>
 </html>
