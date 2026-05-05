@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decisão de Moradia - Formulário para Dupla</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    select, textarea, input[type="text"] { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+    .resposta { margin-top: 30px; background: #f0f0f0; padding: 20px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Formulário: Onde Vamos Morar?</h1>
+  <form id="moradiaForm">
+    <label for="nome">Seu nome:</label>
+    <input type="text" name="nome" id="nome" placeholder="Ex: Laura">
+
+    <label for="nome2">Nome da outra pessoa:</label>
+    <input type="text" name="nome2" id="nome2" placeholder="Ex: Marcelo">
+
+    <label>1. Preferimos área:</label>
+    <select name="area">
+      <option value="urbana">Urbana</option>
+      <option value="suburbana">Suburbana</option>
+      <option value="rural">Rural</option>
+    </select>
+
+    <label>2. Locais importantes por perto:</label>
+    <textarea name="locais">Trabalho, família, amigos, academia, supermercado...</textarea>
+
+    <label>3. Estilo de vida preferido:</label>
+    <select name="estilo">
+      <option value="agitado">Agitado e conveniente</option>
+      <option value="tranquilo">Tranquilo e espaçoso</option>
+    </select>
+
+    <label>4. Transporte público fácil é necessário?</label>
+    <select name="transporte">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>5. Preferimos fazer tudo a pé/bicicleta?</label>
+    <select name="mobilidade">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>6. Tipo de moradia:</label>
+    <select name="tipo">
+      <option value="apartamento">Apartamento</option>
+      <option value="casa">Casa</option>
+      <option value="loft">Loft</option>
+      <option value="studio">Studio</option>
+    </select>
+
+    <label>7. Quantidade de quartos e banheiros:</label>
+    <input type="text" name="quartos" placeholder="Ex: 2 quartos e 1 banheiro">
+
+    <label>8. Espaço externo (varanda, quintal) é importante?</label>
+    <select name="espaco">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>9. Temos ou pretendemos ter pets?</label>
+    <select name="pets">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>10. Orçamento mensal máximo (aluguel + contas):</label>
+    <input type="text" name="orcamento" placeholder="Ex: R$ 3.000">
+
+    <label>11. Abrimos mão de conforto por preço menor?</label>
+    <select name="conforto_vs_preco">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>12. Precisamos de home office?</label>
+    <select name="homeOffice">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>13. Costumamos receber visitas com frequência?</label>
+    <select name="visitas">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>14. Precisamos de isolamento acústico ou privacidade?</label>
+    <select name="isolamento">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>15. Prioridades no dia a dia:</label>
+    <textarea name="prioridades_dia">Ex: Cozinhar, academia, silêncio, natureza, segurança...</textarea>
+
+    <label>16. Quanto tempo pretendemos morar no local?</label>
+    <select name="tempo">
+      <option value="menos_1">Menos de 1 ano</option>
+      <option value="1_3">1 a 3 anos</option>
+      <option value="mais_3">Mais de 3 anos</option>
+    </select>
+
+    <label>17. Pretendemos ter filhos ou fazer mudanças grandes em breve?</label>
+    <select name="mudancas_futuras">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>18. A casa precisa ser flexível para mudanças?</label>
+    <select name="flexivel">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+    </select>
+
+    <label>19. O que é essencial para cada um em um lar?</label>
+    <textarea name="essenciais">Ex: Sol da manhã, boa cozinha, elevador, silêncio, bairro seguro...</textarea>
+
+    <label>20. Algo que um de nós não suporta em uma casa?</label>
+    <textarea name="insuportavel">Ex: barulho, falta de luz natural, prédios altos ao redor...</textarea>
+
+    <label>21. 3 prioridades absolutas para você:</label>
+    <textarea name="prioridades"></textarea>
+
+    <label>22. 3 coisas que você está disposto(a) a negociar:</label>
+    <textarea name="negociaveis"></textarea>
+
+    <button type="button" onclick="mostrarRespostas()">Ver Respostas</button>
+  </form>
+
+  <div class="resposta" id="respostaDiv" style="display:none;"></div>
+
+  <script>
+    function mostrarRespostas() {
+      const form = document.forms["moradiaForm"];
+      let output = "<h2>Respostas:</h2><ul>";
+      for (let i = 0; i < form.elements.length; i++) {
+        const el = form.elements[i];
+        if (el.name && el.value.trim() !== "") {
+          output += `<li><strong>${el.name}:</strong> ${el.value}</li>`;
+        }
+      }
+      output += "</ul>";
+      document.getElementById("respostaDiv").innerHTML = output;
+      document.getElementById("respostaDiv").style.display = "block";
+    }
+  </script>
+</body>
+</html>
